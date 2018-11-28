@@ -1,0 +1,630 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{TDP\_KPI\_Check}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+        \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+        \PY{k+kn}{from} \PY{n+nn}{sqlalchemy} \PY{k}{import} \PY{n}{create\PYZus{}engine}
+        \PY{k+kn}{from} \PY{n+nn}{datetime} \PY{k}{import} \PY{n}{datetime}
+\end{Verbatim}
+
+
+    \subsection{Step1
+資料庫連接設定}\label{step1-ux8cc7ux6599ux5eabux9023ux63a5ux8a2dux5b9a}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:}     \PY{n}{db\PYZus{}test\PYZus{}string1} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{postgresql://postgres:transiot@52.69.32.193:5432/tms\PYZus{}log}\PY{l+s+s1}{\PYZsq{}}
+            \PY{n}{db\PYZus{}test\PYZus{}string2} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{postgresql://postgres:transiot@52.69.32.193:5432/tms\PYZus{}data}\PY{l+s+s1}{\PYZsq{}}
+            \PY{n}{tms\PYZus{}test\PYZus{}log} \PY{o}{=} \PY{n}{create\PYZus{}engine}\PY{p}{(}\PY{n}{db\PYZus{}test\PYZus{}string1}\PY{p}{,} \PY{n}{pool\PYZus{}size}\PY{o}{=}\PY{l+m+mi}{10}\PY{p}{,} \PY{n}{max\PYZus{}overflow}\PY{o}{=}\PY{l+m+mi}{20}\PY{p}{)}
+            \PY{n}{tms\PYZus{}test\PYZus{}data} \PY{o}{=} \PY{n}{create\PYZus{}engine}\PY{p}{(}\PY{n}{db\PYZus{}test\PYZus{}string2}\PY{p}{,} \PY{n}{pool\PYZus{}size}\PY{o}{=}\PY{l+m+mi}{10}\PY{p}{,} \PY{n}{max\PYZus{}overflow}\PY{o}{=}\PY{l+m+mi}{20}\PY{p}{)} \PY{c+c1}{\PYZsh{}測試機}
+            
+            \PY{n}{db\PYZus{}string1} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{postgresql://postgres:RDSiot@192.168.1.252:5432/tms\PYZus{}log}\PY{l+s+s1}{\PYZsq{}}
+            \PY{n}{db\PYZus{}string2} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{postgresql://postgres:RDSiot@192.168.1.252:5432/tms\PYZus{}data}\PY{l+s+s1}{\PYZsq{}}
+            \PY{n}{tms\PYZus{}log} \PY{o}{=} \PY{n}{create\PYZus{}engine}\PY{p}{(}\PY{n}{db\PYZus{}string1}\PY{p}{,} \PY{n}{pool\PYZus{}size}\PY{o}{=}\PY{l+m+mi}{10}\PY{p}{,} \PY{n}{max\PYZus{}overflow}\PY{o}{=}\PY{l+m+mi}{20}\PY{p}{)}
+            \PY{n}{tms\PYZus{}data} \PY{o}{=} \PY{n}{create\PYZus{}engine}\PY{p}{(}\PY{n}{db\PYZus{}string2}\PY{p}{,} \PY{n}{pool\PYZus{}size}\PY{o}{=}\PY{l+m+mi}{10}\PY{p}{,} \PY{n}{max\PYZus{}overflow}\PY{o}{=}\PY{l+m+mi}{20}\PY{p}{)} \PY{c+c1}{\PYZsh{}正式機}
+\end{Verbatim}
+
+
+    \subsection{step2
+撈出所有體驗用戶的資料}\label{step2-ux6488ux51faux6240ux6709ux9ad4ux9a57ux7528ux6236ux7684ux8cc7ux6599}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:}     \PY{n}{user} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}sql}\PY{p}{(} \PY{l+s+s2}{\PYZdq{}\PYZdq{}\PYZdq{}}\PY{l+s+s2}{SELECT vehicle\PYZus{}id, event\PYZus{}time, total\PYZus{}mileage,}\PY{l+s+se}{\PYZbs{}}
+        \PY{l+s+s2}{    event\PYZus{}lon, event\PYZus{}lat, speed,battery\PYZus{}voltage, ua\PYZus{}time, ud\PYZus{}time from }\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{TDP\PYZus{}all\PYZus{}user}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ where event\PYZus{}time between }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{2018\PYZhy{}10\PYZhy{}01}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}}
+        \PY{l+s+s2}{    and }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{2018\PYZhy{}11\PYZhy{}20 12:00:00}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{ }\PY{l+s+se}{\PYZbs{}}
+        \PY{l+s+s2}{    and vehicle\PYZus{}id in(}\PY{l+s+se}{\PYZbs{}}
+        \PY{l+s+s2}{    }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{000CBF148844}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{,}\PY{l+s+se}{\PYZbs{}}
+        \PY{l+s+s2}{    }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{000CBF148894}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{,}\PY{l+s+se}{\PYZbs{}}
+        \PY{l+s+s2}{    }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{000CBF148ACC}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{,}\PY{l+s+se}{\PYZbs{}}
+        \PY{l+s+s2}{    }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{000CBF148D9B}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{,}\PY{l+s+se}{\PYZbs{}}
+        \PY{l+s+s2}{    }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{000CBF148EC4}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{,}\PY{l+s+se}{\PYZbs{}}
+        \PY{l+s+s2}{    }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{000CBF148EC9}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{,}\PY{l+s+se}{\PYZbs{}}
+        \PY{l+s+s2}{    }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{000CBF148ECE}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{,}\PY{l+s+se}{\PYZbs{}}
+        \PY{l+s+s2}{    }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{000CBF148F8E}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{,}\PY{l+s+se}{\PYZbs{}}
+        \PY{l+s+s2}{    }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{000CBF149109}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{,}\PY{l+s+se}{\PYZbs{}}
+        \PY{l+s+s2}{    }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{000CBF149141}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{,}\PY{l+s+se}{\PYZbs{}}
+        \PY{l+s+s2}{    }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{000CBF149144}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{,}\PY{l+s+se}{\PYZbs{}}
+        \PY{l+s+s2}{    }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{000CBF1492AC}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{,}\PY{l+s+se}{\PYZbs{}}
+        \PY{l+s+s2}{    }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{000CBF149332}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{,}\PY{l+s+se}{\PYZbs{}}
+        \PY{l+s+s2}{    }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{000CBF149780}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{,}\PY{l+s+se}{\PYZbs{}}
+        \PY{l+s+s2}{    }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{000CBF14981D}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{,}\PY{l+s+se}{\PYZbs{}}
+        \PY{l+s+s2}{    }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{000CBF149843}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{,}\PY{l+s+se}{\PYZbs{}}
+        \PY{l+s+s2}{    }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{000CBF149922}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{,}\PY{l+s+se}{\PYZbs{}}
+        \PY{l+s+s2}{    }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{000CBF149B53}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{,}\PY{l+s+se}{\PYZbs{}}
+        \PY{l+s+s2}{    }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{000CBF149B56}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{,}\PY{l+s+se}{\PYZbs{}}
+        \PY{l+s+s2}{    }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{000CBF149B79}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{,}\PY{l+s+se}{\PYZbs{}}
+        \PY{l+s+s2}{    }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{000CBF149B80}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{,}\PY{l+s+se}{\PYZbs{}}
+        \PY{l+s+s2}{    }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{000CBF149B96}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{,}\PY{l+s+se}{\PYZbs{}}
+        \PY{l+s+s2}{    }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{000CBF149BB2}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{,}\PY{l+s+se}{\PYZbs{}}
+        \PY{l+s+s2}{    }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{000CBF149BC3}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{,}\PY{l+s+se}{\PYZbs{}}
+        \PY{l+s+s2}{    }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{000CBF149BC6}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{,}\PY{l+s+se}{\PYZbs{}}
+        \PY{l+s+s2}{    }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{000CBF149BD2}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{,}\PY{l+s+se}{\PYZbs{}}
+        \PY{l+s+s2}{    }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{000CBF149C54}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{,}\PY{l+s+se}{\PYZbs{}}
+        \PY{l+s+s2}{    }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{000CBF149CAE}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{,}\PY{l+s+se}{\PYZbs{}}
+        \PY{l+s+s2}{    }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{000CBF149CDB}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{,}\PY{l+s+se}{\PYZbs{}}
+        \PY{l+s+s2}{    }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{000CBF149CF2}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{,}\PY{l+s+se}{\PYZbs{}}
+        \PY{l+s+s2}{    }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{000CBF149D1D}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{,}\PY{l+s+se}{\PYZbs{}}
+        \PY{l+s+s2}{    }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{000CBF149D1F}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{,}\PY{l+s+se}{\PYZbs{}}
+        \PY{l+s+s2}{    }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{000CBF149D24}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{,}\PY{l+s+se}{\PYZbs{}}
+        \PY{l+s+s2}{    }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{000CBF149D3B}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{,}\PY{l+s+se}{\PYZbs{}}
+        \PY{l+s+s2}{    }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{000CBF149D40}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{,}\PY{l+s+se}{\PYZbs{}}
+        \PY{l+s+s2}{    }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{000CBF149D45}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{,}\PY{l+s+se}{\PYZbs{}}
+        \PY{l+s+s2}{    }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{000CBF149D59}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{,}\PY{l+s+se}{\PYZbs{}}
+        \PY{l+s+s2}{    }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{000CBF149D61}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{,}\PY{l+s+se}{\PYZbs{}}
+        \PY{l+s+s2}{    }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{000CBF149D65}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{,}\PY{l+s+se}{\PYZbs{}}
+        \PY{l+s+s2}{    }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{000CBF149D94}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{,}\PY{l+s+se}{\PYZbs{}}
+        \PY{l+s+s2}{    }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{8CDE52B21635}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{,}\PY{l+s+se}{\PYZbs{}}
+        \PY{l+s+s2}{    }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{8CDE52B216D1}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{,}\PY{l+s+se}{\PYZbs{}}
+        \PY{l+s+s2}{    }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{8CDE52B22BBA}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{,}\PY{l+s+se}{\PYZbs{}}
+        \PY{l+s+s2}{    }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{8CDE52B22C28}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{,}\PY{l+s+se}{\PYZbs{}}
+        \PY{l+s+s2}{    }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{8CDE52B24446}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{,}\PY{l+s+se}{\PYZbs{}}
+        \PY{l+s+s2}{    }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{8CDE52B2446A}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{,}\PY{l+s+se}{\PYZbs{}}
+        \PY{l+s+s2}{    }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{8CDE52B244AD}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{,}\PY{l+s+se}{\PYZbs{}}
+        \PY{l+s+s2}{    }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{8CDE52B24EA5}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{,}\PY{l+s+se}{\PYZbs{}}
+        \PY{l+s+s2}{    }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{8CDE52B24EEA}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{,}\PY{l+s+se}{\PYZbs{}}
+        \PY{l+s+s2}{    }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{8CDE52B2AE79}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{,}\PY{l+s+se}{\PYZbs{}}
+        \PY{l+s+s2}{    }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{000CBF1488A2}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{,}\PY{l+s+se}{\PYZbs{}}
+        \PY{l+s+s2}{    }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{8CDE5204141D}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{,}\PY{l+s+se}{\PYZbs{}}
+        \PY{l+s+s2}{    }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{000CBF148831}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{,}\PY{l+s+se}{\PYZbs{}}
+        \PY{l+s+s2}{    }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{001167E5E86B}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{,}\PY{l+s+se}{\PYZbs{}}
+        \PY{l+s+s2}{    }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{8CDE52B22B16}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{,}\PY{l+s+se}{\PYZbs{}}
+        \PY{l+s+s2}{    }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{000CBF149D1E}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{,}\PY{l+s+se}{\PYZbs{}}
+        \PY{l+s+s2}{    }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{000CBF149CA3}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{) }\PY{l+s+s2}{\PYZdq{}\PYZdq{}\PYZdq{}}\PY{p}{,} \PY{n}{tms\PYZus{}data}\PY{p}{)}
+\end{Verbatim}
+
+
+    \subsection{Step3
+體驗用戶的資料態樣}\label{step3-ux9ad4ux9a57ux7528ux6236ux7684ux8cc7ux6599ux614bux6a23}
+
+    \paragraph{a.前5筆資料}\label{a.ux524d5ux7b46ux8cc7ux6599}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}52}]:} \PY{n}{user}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}52}]:}      vehicle\_id                event\_time  total\_mileage   event\_lon  \textbackslash{}
+         0  000CBF149D3B 2018-10-07 14:27:48+00:00       0.277778  121.635826   
+         1  000CBF149843 2018-10-07 14:29:36+00:00     119.444000  121.479100   
+         2  8CDE52B2AE79 2018-10-07 14:27:50+00:00     362.222000  121.370000   
+         3  000CBF149843 2018-10-07 14:27:53+00:00     241.389000  121.479100   
+         4  8CDE52B24EEA 2018-10-07 14:28:00+00:00     272.222000  121.444160   
+         
+            event\_lat  speed  battery\_voltage  ua\_time  ud\_time  
+         0  25.069372    0.0             13.3      0.0      0.0  
+         1  25.030561    0.0             13.3      0.0      0.0  
+         2  25.064930   86.0             14.3      0.0      0.0  
+         3  25.030561   53.0             14.2      0.0      0.0  
+         4  25.090178   70.0             14.6      0.0      0.0  
+\end{Verbatim}
+            
+    \paragraph{b.用戶數}\label{b.ux7528ux6236ux6578}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}53}]:} \PY{n}{user}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{vehicle\PYZus{}id}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{nunique}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}53}]:} 57
+\end{Verbatim}
+            
+    \paragraph{c.用戶總資料筆數}\label{c.ux7528ux6236ux7e3dux8cc7ux6599ux7b46ux6578}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}54}]:} \PY{n}{user}\PY{o}{.}\PY{n}{shape}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}54}]:} (613575, 9)
+\end{Verbatim}
+            
+    \paragraph{d.累積使用人次}\label{d.ux7d2fux7a4dux4f7fux7528ux4ebaux6b21}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}55}]:} \PY{n}{user}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{event\PYZus{}time}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{=}\PY{n}{user}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{event\PYZus{}time}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{dt}\PY{o}{.}\PY{n}{tz\PYZus{}convert}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Asia/Taipei}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{c+c1}{\PYZsh{}\PYZsh{}時區調整}
+         \PY{n}{user}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{event\PYZus{}time}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{=}\PY{n}{user}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{event\PYZus{}time}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{dt}\PY{o}{.}\PY{n}{strftime}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZpc{}}\PY{l+s+s2}{Y\PYZhy{}}\PY{l+s+s2}{\PYZpc{}}\PY{l+s+s2}{m\PYZhy{}}\PY{l+s+si}{\PYZpc{}d}\PY{l+s+s2}{ }\PY{l+s+s2}{\PYZpc{}}\PY{l+s+s2}{H:}\PY{l+s+s2}{\PYZpc{}}\PY{l+s+s2}{M:}\PY{l+s+s2}{\PYZpc{}}\PY{l+s+s2}{S}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{user}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{event\PYZus{}time}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{=}\PY{n}{pd}\PY{o}{.}\PY{n}{to\PYZus{}datetime}\PY{p}{(}\PY{n}{user}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{event\PYZus{}time}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,}\PY{n+nb}{format}\PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZpc{}}\PY{l+s+s2}{Y\PYZhy{}}\PY{l+s+s2}{\PYZpc{}}\PY{l+s+s2}{m\PYZhy{}}\PY{l+s+si}{\PYZpc{}d}\PY{l+s+s2}{ }\PY{l+s+s2}{\PYZpc{}}\PY{l+s+s2}{H:}\PY{l+s+s2}{\PYZpc{}}\PY{l+s+s2}{M:}\PY{l+s+s2}{\PYZpc{}}\PY{l+s+s2}{S}\PY{l+s+s2}{\PYZdq{}} \PY{p}{)}
+         \PY{n}{user}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{event\PYZus{}date}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{=}\PY{n}{user}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{event\PYZus{}time}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{dt}\PY{o}{.}\PY{n}{date} \PY{c+c1}{\PYZsh{}\PYZsh{}將時間格式拆出，僅留日期}
+         \PY{n}{user\PYZus{}by\PYZus{}date}\PY{o}{=}\PY{n}{user}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{event\PYZus{}date}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{o}{.}\PY{n}{vehicle\PYZus{}id}\PY{o}{.}\PY{n}{nunique}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{reset\PYZus{}index}\PY{p}{(}\PY{p}{)} \PY{c+c1}{\PYZsh{}\PYZsh{}計算每日使用人次}
+         \PY{n}{user\PYZus{}by\PYZus{}date}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{vehicle\PYZus{}id\PYZus{}cumsum}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{=}\PY{n}{user\PYZus{}by\PYZus{}date}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{vehicle\PYZus{}id}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{cumsum}\PY{p}{(}\PY{p}{)} \PY{c+c1}{\PYZsh{}\PYZsh{}計算累積使用人次}
+         \PY{n}{user\PYZus{}by\PYZus{}date}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}55}]:}     event\_date  vehicle\_id  vehicle\_id\_cumsum
+         0   2018-10-01          11                 11
+         1   2018-10-02          15                 26
+         2   2018-10-03          27                 53
+         3   2018-10-04          29                 82
+         4   2018-10-05          32                114
+         5   2018-10-06          30                144
+         6   2018-10-07          28                172
+         7   2018-10-08          37                209
+         8   2018-10-09          37                246
+         9   2018-10-10          31                277
+         10  2018-10-11          42                319
+         11  2018-10-12          37                356
+         12  2018-10-13          33                389
+         13  2018-10-14          33                422
+         14  2018-10-15          40                462
+         15  2018-10-16          44                506
+         16  2018-10-17          44                550
+         17  2018-10-18          41                591
+         18  2018-10-19          35                626
+         19  2018-10-20          33                659
+         20  2018-10-21          31                690
+         21  2018-10-22          38                728
+         22  2018-10-23          36                764
+         23  2018-10-24          37                801
+         24  2018-10-25          33                834
+         25  2018-10-26          37                871
+         26  2018-10-27          28                899
+         27  2018-10-28          28                927
+         28  2018-10-29          34                961
+         29  2018-10-30          32                993
+         30  2018-10-31          39               1032
+         31  2018-11-01          37               1069
+         32  2018-11-02          33               1102
+         33  2018-11-03          23               1125
+         34  2018-11-04          24               1149
+         35  2018-11-05          30               1179
+         36  2018-11-06          28               1207
+         37  2018-11-07          32               1239
+         38  2018-11-08          29               1268
+         39  2018-11-09          31               1299
+         40  2018-11-10          27               1326
+         41  2018-11-11          26               1352
+         42  2018-11-12          27               1379
+         43  2018-11-13          30               1409
+         44  2018-11-14          33               1442
+         45  2018-11-15          30               1472
+         46  2018-11-16          28               1500
+         47  2018-11-17          12               1512
+         48  2018-11-18          14               1526
+         49  2018-11-19          18               1544
+         50  2018-11-20          15               1559
+\end{Verbatim}
+            
+    \subsection{Step4
+撈出所有體驗用戶總推播資料筆數}\label{step4-ux6488ux51faux6240ux6709ux9ad4ux9a57ux7528ux6236ux7e3dux63a8ux64adux8cc7ux6599ux7b46ux6578}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}56}]:} \PY{n}{push} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}sql}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}\PYZdq{}\PYZdq{}}\PY{l+s+s2}{ select * from }\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{TDP\PYZus{}all\PYZus{}push\PYZus{}V1}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ where  user\PYZus{}id in(}\PY{l+s+se}{\PYZbs{}}
+         \PY{l+s+s2}{    }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{000CBF148844}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{,}\PY{l+s+se}{\PYZbs{}}
+         \PY{l+s+s2}{    }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{000CBF148894}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{,}\PY{l+s+se}{\PYZbs{}}
+         \PY{l+s+s2}{    }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{000CBF148ACC}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{,}\PY{l+s+se}{\PYZbs{}}
+         \PY{l+s+s2}{    }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{000CBF148D9B}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{,}\PY{l+s+se}{\PYZbs{}}
+         \PY{l+s+s2}{    }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{000CBF148EC4}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{,}\PY{l+s+se}{\PYZbs{}}
+         \PY{l+s+s2}{    }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{000CBF148EC9}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{,}\PY{l+s+se}{\PYZbs{}}
+         \PY{l+s+s2}{    }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{000CBF148ECE}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{,}\PY{l+s+se}{\PYZbs{}}
+         \PY{l+s+s2}{    }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{000CBF148F8E}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{,}\PY{l+s+se}{\PYZbs{}}
+         \PY{l+s+s2}{    }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{000CBF149109}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{,}\PY{l+s+se}{\PYZbs{}}
+         \PY{l+s+s2}{    }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{000CBF149141}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{,}\PY{l+s+se}{\PYZbs{}}
+         \PY{l+s+s2}{    }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{000CBF149144}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{,}\PY{l+s+se}{\PYZbs{}}
+         \PY{l+s+s2}{    }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{000CBF1492AC}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{,}\PY{l+s+se}{\PYZbs{}}
+         \PY{l+s+s2}{    }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{000CBF149332}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{,}\PY{l+s+se}{\PYZbs{}}
+         \PY{l+s+s2}{    }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{000CBF149780}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{,}\PY{l+s+se}{\PYZbs{}}
+         \PY{l+s+s2}{    }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{000CBF14981D}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{,}\PY{l+s+se}{\PYZbs{}}
+         \PY{l+s+s2}{    }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{000CBF149843}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{,}\PY{l+s+se}{\PYZbs{}}
+         \PY{l+s+s2}{    }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{000CBF149922}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{,}\PY{l+s+se}{\PYZbs{}}
+         \PY{l+s+s2}{    }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{000CBF149B53}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{,}\PY{l+s+se}{\PYZbs{}}
+         \PY{l+s+s2}{    }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{000CBF149B56}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{,}\PY{l+s+se}{\PYZbs{}}
+         \PY{l+s+s2}{    }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{000CBF149B79}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{,}\PY{l+s+se}{\PYZbs{}}
+         \PY{l+s+s2}{    }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{000CBF149B80}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{,}\PY{l+s+se}{\PYZbs{}}
+         \PY{l+s+s2}{    }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{000CBF149B96}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{,}\PY{l+s+se}{\PYZbs{}}
+         \PY{l+s+s2}{    }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{000CBF149BB2}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{,}\PY{l+s+se}{\PYZbs{}}
+         \PY{l+s+s2}{    }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{000CBF149BC3}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{,}\PY{l+s+se}{\PYZbs{}}
+         \PY{l+s+s2}{    }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{000CBF149BC6}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{,}\PY{l+s+se}{\PYZbs{}}
+         \PY{l+s+s2}{    }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{000CBF149BD2}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{,}\PY{l+s+se}{\PYZbs{}}
+         \PY{l+s+s2}{    }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{000CBF149C54}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{,}\PY{l+s+se}{\PYZbs{}}
+         \PY{l+s+s2}{    }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{000CBF149CAE}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{,}\PY{l+s+se}{\PYZbs{}}
+         \PY{l+s+s2}{    }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{000CBF149CDB}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{,}\PY{l+s+se}{\PYZbs{}}
+         \PY{l+s+s2}{    }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{000CBF149CF2}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{,}\PY{l+s+se}{\PYZbs{}}
+         \PY{l+s+s2}{    }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{000CBF149D1D}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{,}\PY{l+s+se}{\PYZbs{}}
+         \PY{l+s+s2}{    }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{000CBF149D1F}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{,}\PY{l+s+se}{\PYZbs{}}
+         \PY{l+s+s2}{    }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{000CBF149D24}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{,}\PY{l+s+se}{\PYZbs{}}
+         \PY{l+s+s2}{    }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{000CBF149D3B}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{,}\PY{l+s+se}{\PYZbs{}}
+         \PY{l+s+s2}{    }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{000CBF149D40}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{,}\PY{l+s+se}{\PYZbs{}}
+         \PY{l+s+s2}{    }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{000CBF149D45}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{,}\PY{l+s+se}{\PYZbs{}}
+         \PY{l+s+s2}{    }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{000CBF149D59}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{,}\PY{l+s+se}{\PYZbs{}}
+         \PY{l+s+s2}{    }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{000CBF149D61}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{,}\PY{l+s+se}{\PYZbs{}}
+         \PY{l+s+s2}{    }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{000CBF149D65}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{,}\PY{l+s+se}{\PYZbs{}}
+         \PY{l+s+s2}{    }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{000CBF149D94}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{,}\PY{l+s+se}{\PYZbs{}}
+         \PY{l+s+s2}{    }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{8CDE52B21635}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{,}\PY{l+s+se}{\PYZbs{}}
+         \PY{l+s+s2}{    }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{8CDE52B216D1}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{,}\PY{l+s+se}{\PYZbs{}}
+         \PY{l+s+s2}{    }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{8CDE52B22BBA}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{,}\PY{l+s+se}{\PYZbs{}}
+         \PY{l+s+s2}{    }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{8CDE52B22C28}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{,}\PY{l+s+se}{\PYZbs{}}
+         \PY{l+s+s2}{    }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{8CDE52B24446}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{,}\PY{l+s+se}{\PYZbs{}}
+         \PY{l+s+s2}{    }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{8CDE52B2446A}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{,}\PY{l+s+se}{\PYZbs{}}
+         \PY{l+s+s2}{    }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{8CDE52B244AD}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{,}\PY{l+s+se}{\PYZbs{}}
+         \PY{l+s+s2}{    }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{8CDE52B24EA5}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{,}\PY{l+s+se}{\PYZbs{}}
+         \PY{l+s+s2}{    }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{8CDE52B24EEA}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{,}\PY{l+s+se}{\PYZbs{}}
+         \PY{l+s+s2}{    }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{8CDE52B2AE79}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{,}\PY{l+s+se}{\PYZbs{}}
+         \PY{l+s+s2}{    }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{000CBF1488A2}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{,}\PY{l+s+se}{\PYZbs{}}
+         \PY{l+s+s2}{    }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{8CDE5204141D}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{,}\PY{l+s+se}{\PYZbs{}}
+         \PY{l+s+s2}{    }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{000CBF148831}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{,}\PY{l+s+se}{\PYZbs{}}
+         \PY{l+s+s2}{    }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{001167E5E86B}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{,}\PY{l+s+se}{\PYZbs{}}
+         \PY{l+s+s2}{    }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{8CDE52B22B16}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{,}\PY{l+s+se}{\PYZbs{}}
+         \PY{l+s+s2}{    }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{000CBF149D1E}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{,}\PY{l+s+se}{\PYZbs{}}
+         \PY{l+s+s2}{    }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{000CBF149CA3}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{) }\PY{l+s+s2}{\PYZdq{}\PYZdq{}\PYZdq{}}\PY{p}{,}\PY{n}{tms\PYZus{}data}\PY{p}{)}
+\end{Verbatim}
+
+
+    \subsection{Step5
+體驗用戶總推播資料態樣}\label{step5-ux9ad4ux9a57ux7528ux6236ux7e3dux63a8ux64adux8cc7ux6599ux614bux6a23}
+
+    \paragraph{a.前五筆資料}\label{a.ux524dux4e94ux7b46ux8cc7ux6599}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}57}]:} \PY{n}{push}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{event\PYZus{}time}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{=}\PY{n}{push}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{event\PYZus{}time}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{dt}\PY{o}{.}\PY{n}{tz\PYZus{}convert}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Asia/Taipei}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{c+c1}{\PYZsh{}\PYZsh{}時區調整}
+         \PY{n}{push}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{event\PYZus{}time}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{=}\PY{n}{push}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{event\PYZus{}time}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{dt}\PY{o}{.}\PY{n}{strftime}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZpc{}}\PY{l+s+s2}{Y\PYZhy{}}\PY{l+s+s2}{\PYZpc{}}\PY{l+s+s2}{m\PYZhy{}}\PY{l+s+si}{\PYZpc{}d}\PY{l+s+s2}{ }\PY{l+s+s2}{\PYZpc{}}\PY{l+s+s2}{H:}\PY{l+s+s2}{\PYZpc{}}\PY{l+s+s2}{M:}\PY{l+s+s2}{\PYZpc{}}\PY{l+s+s2}{S}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{push}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{event\PYZus{}time}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{=}\PY{n}{pd}\PY{o}{.}\PY{n}{to\PYZus{}datetime}\PY{p}{(}\PY{n}{push}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{event\PYZus{}time}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,}\PY{n+nb}{format}\PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZpc{}}\PY{l+s+s2}{Y\PYZhy{}}\PY{l+s+s2}{\PYZpc{}}\PY{l+s+s2}{m\PYZhy{}}\PY{l+s+si}{\PYZpc{}d}\PY{l+s+s2}{ }\PY{l+s+s2}{\PYZpc{}}\PY{l+s+s2}{H:}\PY{l+s+s2}{\PYZpc{}}\PY{l+s+s2}{M:}\PY{l+s+s2}{\PYZpc{}}\PY{l+s+s2}{S}\PY{l+s+s2}{\PYZdq{}} \PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}58}]:} \PY{n}{push}\PY{o}{=}\PY{n}{push}\PY{p}{[}\PY{p}{(}\PY{n}{push}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{event\PYZus{}time}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{\PYZgt{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{2018\PYZhy{}10\PYZhy{}01}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} \PY{o}{\PYZam{}} \PY{p}{(}\PY{n}{push}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{event\PYZus{}time}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{\PYZlt{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{2018\PYZhy{}11\PYZhy{}20 12:00:00}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{]} \PY{c+c1}{\PYZsh{}\PYZsh{}時間篩選}
+         \PY{n}{push}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}58}]:}                                 noti\_id       user\_id push\_title  \textbackslash{}
+         0  a409d0a8-943d-4a93-94cc-b3308a29715d  8CDE52B2AE79   【危險路段警示】   
+         1  23aacfc4-7c49-4ff9-9c09-1c09221d61b6  8CDE52B2AE79   【危險路段警示】   
+         2  d6d01d65-380a-4607-b902-fbe2ca7f8b45  8CDE52B2AE79   【危險路段警示】   
+         3  cc98ee23-f9df-4cd3-83fe-5123bb23f7c7  8CDE52B2AE79   【危險路段警示】   
+         4  c0e012a8-e2a8-440b-8012-12959817a6c4  8CDE52B2AE79   【危險路段警示】   
+         
+                  push\_contents           insert\_datetime   latitude   longitude  \textbackslash{}
+         0  前方為易發生事故危險路段，請小心駕駛。 2018-10-28 07:24:21+00:00  25.028725  121.539370   
+         1  前方為易發生事故危險路段，請小心駕駛。 2018-10-28 07:25:09+00:00  25.049928  121.529499   
+         2  前方為易發生事故危險路段，請小心駕駛。 2018-10-28 07:26:37+00:00  25.049928  121.529499   
+         3  前方為易發生事故危險路段，請小心駕駛。 2018-10-28 07:27:39+00:00  25.049928  121.529499   
+         4  前方為易發生事故危險路段，請小心駕駛。 2018-10-28 07:32:37+00:00  25.049928  121.529499   
+         
+                                             gfb\_device\_token          event\_time  \textbackslash{}
+         0  arn:aws:sns:ap-northeast-1:098408861176:endpoi{\ldots} 2018-10-28 15:24:14   
+         1  arn:aws:sns:ap-northeast-1:098408861176:endpoi{\ldots} 2018-10-28 15:25:02   
+         2  arn:aws:sns:ap-northeast-1:098408861176:endpoi{\ldots} 2018-10-28 15:26:30   
+         3  arn:aws:sns:ap-northeast-1:098408861176:endpoi{\ldots} 2018-10-28 15:27:19   
+         4  arn:aws:sns:ap-northeast-1:098408861176:endpoi{\ldots} 2018-10-28 15:32:32   
+         
+            event\_lat   event\_lon  
+         0  25.041447  121.551150  
+         1  25.041600  121.544680  
+         2  25.041610  121.544280  
+         3  25.041668  121.540310  
+         4  25.067152  121.534424  
+\end{Verbatim}
+            
+    \paragraph{b.總資料筆數}\label{b.ux7e3dux8cc7ux6599ux7b46ux6578}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}59}]:} \PY{n}{push}\PY{o}{.}\PY{n}{shape}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}59}]:} (257063, 11)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}48}]:} \PY{c+c1}{\PYZsh{}push[\PYZsq{}event\PYZus{}date\PYZsq{}]=push[\PYZsq{}event\PYZus{}time\PYZsq{}].dt.date \PYZsh{}\PYZsh{}將時間格式拆出，僅留日期}
+         \PY{c+c1}{\PYZsh{}push\PYZus{}by\PYZus{}date=push.groupby([\PYZsq{}event\PYZus{}date\PYZsq{}]).size().reset\PYZus{}index(name=\PYZsq{}push\PYZus{}count\PYZsq{}) \PYZsh{}\PYZsh{}計算每日使用人次}
+         \PY{c+c1}{\PYZsh{}push\PYZus{}by\PYZus{}date[\PYZsq{}push\PYZus{}cumsum\PYZsq{}]=push\PYZus{}by\PYZus{}date[\PYZsq{}push\PYZus{}count\PYZsq{}].cumsum()}
+         \PY{c+c1}{\PYZsh{}push\PYZus{}by\PYZus{}date}
+\end{Verbatim}
+
+
+    \subsection{END}\label{end}
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
